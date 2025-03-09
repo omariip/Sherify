@@ -149,7 +149,7 @@ struct AddEventView: View {
                 .background(Color.blue)
                 .cornerRadius(10)
                 .padding(.horizontal, 16)
-                .padding(.vertical, 10)
+                .padding(.vertical, 20)
                 
                 Spacer()
             }
