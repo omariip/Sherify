@@ -47,14 +47,14 @@ struct LoginView: View {
                 Spacer()
                 
                 VStack(spacing: 10) {
-                    Button("Login") {
-                        // Login action
+                    NavigationLink(destination: MainTabView().navigationBarBackButtonHidden(true)) {
+                        Text("Login")
+                            .frame(maxWidth: 330)
+                            .foregroundStyle(.white)
+                            .padding(10)
+                            .background(Color.blue)
+                            .cornerRadius(5)
                     }
-                    .frame(maxWidth: 330)
-                    .foregroundStyle(.white)
-                    .padding(10)
-                    .background(Color.blue)
-                    .cornerRadius(5)
                     
                     NavigationLink(destination: SignUpView()) {
                         Text("Create Account")
@@ -66,7 +66,6 @@ struct LoginView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color(hex: "#F2F2F7"))
             .ignoresSafeArea()
-            .navigationBarBackButtonHidden(true)
         }
     }
 }
@@ -74,3 +73,4 @@ struct LoginView: View {
 #Preview {
     LoginView()
 }
+
