@@ -8,7 +8,6 @@
 import SwiftUI
 
 struct EventsView: View {
-    
     @State private var searchText = ""
     
     // Filter events by search text
@@ -24,34 +23,31 @@ struct EventsView: View {
     }
     
     var body: some View {
-            NavigationStack {
-                List {
-                    // Section header with custom search bar
-                    Section(header: EventsSearchBar(text: $searchText)) {
-                        ForEach(filteredEvents) { event in
-                            EventViewRow(event: event)
-                                .listRowSeparator(.hidden)
-                                .listRowBackground(Color.clear)
-                        }
+        NavigationStack {
+            List {
+                // Section header with custom search bar
+                Section(header: EventsSearchBar(text: $searchText)) {
+                    ForEach(filteredEvents) { event in
+                        
+                        EventViewRow(event: event)
+                        
+                            .listRowSeparator(.hidden)
+                            .listRowBackground(Color.clear)
                     }
                 }
-                .listStyle(.plain)
-                .navigationTitle("Events")
-                .toolbar {
-                    ToolbarItem(placement: .navigationBarTrailing) {
-                        Button {
-                        } label: {
-                            Image(systemName: "plus")
-                        }
-                    }
-                }
-                .background(Color(.systemGray6))
             }
+            .listStyle(.plain)
+            .navigationTitle("Events")
+            .toolbar {
+                ToolbarItem(placement: .navigationBarTrailing) {
+                    Button {
+                        // Action: e.g., open AddEventView
+                    } label: {
+                        Image(systemName: "plus")
+                    }
+                }
+            }
+            .background(Color(.systemGray6))
         }
+    }
 }
-
-// MARK: - Preview
-#Preview {
-    EventsView()
-}
-

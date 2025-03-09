@@ -145,7 +145,7 @@ struct AddEventView: View {
                 .font(.headline)
                 .foregroundColor(.white)
                 .frame(maxWidth: .infinity)
-                .padding()
+                .padding(8)
                 .background(Color.blue)
                 .cornerRadius(10)
                 .padding(.horizontal, 16)
