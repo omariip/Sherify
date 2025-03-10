@@ -60,15 +60,14 @@ struct HomeView: View {
 
                 Spacer()
             }
+            
             .padding(.horizontal)
-            .background(Color(.systemGray6))
             .ignoresSafeArea(edges: .bottom)
             .safeAreaInset(edge: .bottom) {
                 Color.clear.frame(height: 50)
             }
         }
-        .navigationTitle("Home") // Moves title to top bar
-        .navigationBarTitleDisplayMode(.inline)
+        .background(Color(.systemGray6))
     }
 }
 
