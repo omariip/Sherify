@@ -7,7 +7,6 @@
 
 import SwiftUI
 
-// MARK: - Event Row Component
 struct EventRow: View {
     var title: String
     var date: String
@@ -23,4 +22,8 @@ struct EventRow: View {
             Divider()
         }
     }
+}
+
+#Preview {
+    EventRow(title: "test title", date: "Date")
 }

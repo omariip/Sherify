@@ -11,84 +11,72 @@ struct EventDetailsView: View {
     let event: Event
     @State private var isAttending: Bool = false
     @State private var attendingCount: Int = 42
-    
-    // Sample comments to display under the event
+
+
     let comments: [Comment] = [
         Comment(name: "Mathew Boyd", postedTime: "12 hours", text: "This looks great : ) I am excited to come"),
         Comment(name: "Rodger", postedTime: "1 hour", text: "I was going to do this, however my grandma is sick so I don't think I can make it this time."),
         Comment(name: "Jack Sperrow", postedTime: "1 hour", text: "I am going to do a lot of fun : )")
     ]
-    
+
     var body: some View {
         ScrollView {
             VStack(spacing: 16) {
-                // Card for event details
                 VStack(alignment: .center, spacing: 16) {
                     
-                    // Top section: Image on the left, date/time & location on the right
                     HStack(alignment: .top, spacing: 16) {
-                        // Event image
                         Image(event.imageName)
                             .resizable()
-                            .scaledToFill()
+                            .scaledToFit()
                             .frame(width: 150, height: 120)
-                            .clipped()
                             .cornerRadius(8)
-                        
-                        // Date/Time and Location details
+
                         VStack(alignment: .leading, spacing: 6) {
                             Text("Date and Time")
                                 .font(.headline)
                                 .foregroundColor(.black)
-                            
+
                             Text(event.dateLine1)
-                                .font(.system(size: 10))
+                                .font(.footnote)
                                 .foregroundColor(.gray)
-                            
+
                             Text(event.dateLine2)
-                                .font(.system(size: 10))
+                                .font(.footnote)
                                 .foregroundColor(.gray)
-                            
+
                             Spacer().frame(height: 8)
-                            
+
                             Text("Location:")
                                 .font(.headline)
                                 .foregroundColor(.black)
-                            
-                            Text("Sheridan College - Oakville B104")
-                                .font(.system(size: 10))
+
+                            Text(event.location ?? "Location not specified")
+                                .font(.footnote)
                                 .foregroundColor(.gray)
                         }
                     }
-                    
-                    // Event description
+
                     Text(event.description)
-                        .font(.system(size: 12))
+                        .font(.body)
                         .foregroundColor(.black)
                         .multilineTextAlignment(.leading)
-                    
+
                     HStack {
                         Text("Attending: \(attendingCount)")
-                            .font(.system(size: 12))
+                            .font(.footnote)
                             .foregroundColor(.black)
-                        
+
                         Spacer()
-                        
+
                         Text("I am attending")
-                            .font(.system(size: 12))
-                        
+                            .font(.footnote)
+
                         Toggle("", isOn: $isAttending)
                             .labelsHidden()
                             .toggleStyle(SwitchToggleStyle(tint: .blue))
-                            .scaleEffect(0.7)
-                        
                     }
                     .onChange(of: isAttending) { newValue in
-                        if newValue {
-                            attendingCount += 1
-                        } else {
-                            attendingCount -= 1
-                        }
+                        attendingCount += newValue ? 1 : -1
                     }
                 }
                 .padding()
@@ -96,13 +84,20 @@ struct EventDetailsView: View {
                 .background(Color.white)
                 .cornerRadius(12)
                 .shadow(color: Color.gray.opacity(0.1), radius: 4, x: 0, y: 2)
+
                 
-                // Comments Section
                 VStack(spacing: 0) {
                     Divider()
-                    ForEach(comments) { comment in
-                        CommentRow(comment: comment)
-                        Divider()
+                    if comments.isEmpty {
+                        Text("No comments yet")
+                            .font(.footnote)
+                            .foregroundColor(.gray)
+                            .padding()
+                    } else {
+                        ForEach(comments) { comment in
+                            CommentRow(comment: comment)
+                            Divider()
+                        }
                     }
                 }
             }
@@ -112,49 +107,71 @@ struct EventDetailsView: View {
         .navigationTitle(event.title.uppercased())
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
-            // Share button on the top-right
             ToolbarItem(placement: .navigationBarTrailing) {
                 Button {
-                    // Handle share action
+                    shareEvent()
                 } label: {
-                    Image(systemName: "pencil")
+                    Image(systemName: "square.and.arrow.up")
                 }
             }
         }
     }
+    
+    func shareEvent() {
+        let items = [event.title, event.description]
+        let avc = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        UIApplication.shared.windows.first?.rootViewController?.present(avc, animated: true)
+    }
 }
 
-/// A single comment row
 struct CommentRow: View {
     let comment: Comment
-    
+
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
-            // Top row: Name + "Reply" button
             HStack {
                 Text(comment.name)
                     .font(.subheadline)
                     .bold()
-                
+
                 Spacer()
-                
-                Button("Reply") {
-                    // Handle reply
-                }
-                .font(.caption)
-                .foregroundColor(.blue)
+
+                Button("Reply") {}
+                    .font(.caption)
+                    .foregroundColor(.blue)
             }
-            
-            // Posted time
+
             Text("Posted \(comment.postedTime) ago")
                 .font(.caption)
                 .foregroundColor(.gray)
-            
-            // Actual comment text
+
             Text(comment.text)
                 .font(.body)
                 .foregroundColor(.black)
+                .padding(.vertical, 4)
+                .background(Color(.systemGray5))
+                .cornerRadius(8)
         }
         .padding(.vertical, 8)
     }
+}
+
+
+
+#Preview {
+    let sampleEvent = Event(
+        title: "Tech Networking Night",
+        dateLine1: "Friday, March 15, 2025",
+        dateLine2: "6:00 PM - 9:00 PM",
+        description: """
+    Join us for an exciting evening of networking with tech professionals, students, and industry leaders.
+    This event will feature keynote speakers, panel discussions, and plenty of opportunities to connect with others in the tech community.
+
+    Food and drinks will be provided. Don't miss this opportunity to expand your network and gain insights into the tech industry!
+    """,
+        location: "Sheridan College - Oakville B104",
+        imageName: "networking_event"
+    )
+    
+    EventDetailsView(event: sampleEvent)
 }

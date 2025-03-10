@@ -25,7 +25,6 @@ struct EventsView: View {
     var body: some View {
         NavigationStack {
             List {
-                // Section header with custom search bar
                 Section(header: EventsSearchBar(text: $searchText)) {
                     ForEach(filteredEvents) { event in
                         
@@ -50,4 +49,8 @@ struct EventsView: View {
             .background(Color(.systemGray6))
         }
     }
+}
+
+#Preview {
+    EventsView()
 }

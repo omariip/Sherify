@@ -41,3 +41,11 @@ struct SectionCard<Content: View>: View {
         .shadow(color: .gray.opacity(0.2), radius: 3, x: 0, y: 3)
     }
 }
+
+#Preview {
+    SectionCard(title: "Test", showMore: true) {
+        Text("Sample content goes here.")
+            .padding()
+    }
+}
+
