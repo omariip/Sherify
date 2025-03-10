@@ -22,9 +22,7 @@ struct AddEventView: View {
         NavigationStack {
             VStack(spacing: 20) {
                 
-                // Photos Button
                 Button(action: {
-                    // Photo picker action here
                 }) {
                     HStack {
                         Image(systemName: "photo.on.rectangle")
@@ -42,35 +40,34 @@ struct AddEventView: View {
                 
                 // White Card
                 VStack(spacing: 0) {
-                    // 1) Event Title
+
                     TextField("Event Title", text: $eventTitle)
                         .padding(.horizontal)
                         .padding(.vertical, 12)
                     
                     Divider()
                     
-                    // 2) Event Description
                     TextField("Event Description", text: $eventDescription)
                         .padding(.horizontal)
                         .padding(.vertical, 12)
                     
                     Divider()
                     
-                    // 3) Event Location
+ 
                     TextField("Event Location", text: $eventLocation)
                         .padding(.horizontal)
                         .padding(.vertical, 12)
                     
                     Divider()
                     
-                    // 4) Event Categories
+
                     TextField("Event Categories", text: $eventCategories)
                         .padding(.horizontal)
                         .padding(.vertical, 12)
                     
                     Divider()
                     
-                    // 5) Start Date
+              
                     HStack {
                         Text("Start Date")
                             .font(.system(size: 17))
@@ -103,7 +100,7 @@ struct AddEventView: View {
                     
                     Divider()
                     
-                    // 6) End Date
+       
                     HStack {
                         Text("End Date")
                             .font(.system(size: 17))
@@ -155,8 +152,6 @@ struct AddEventView: View {
             }
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .background(Color(.systemGray6))
-            .navigationTitle("Add Event")
-            .navigationBarTitleDisplayMode(.inline)
         }
     }
 }

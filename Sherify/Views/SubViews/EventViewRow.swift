@@ -13,7 +13,7 @@ struct EventViewRow: View {
     
     var body: some View {
         ZStack {
-            // Full cell transparent NavigationLink:
+
             NavigationLink(destination: EventDetailsView(event: event)) {
                 EmptyView()
             }
@@ -21,18 +21,17 @@ struct EventViewRow: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity)
             .opacity(0)
             
-            // Actual content of the cell
+
             VStack(alignment: .leading, spacing: 0) {
-                // 1) Event Image at the top
+
                 Image(event.imageName)
                     .resizable()
                     .scaledToFill()
                     .frame(height: 150)
                     .clipped()
                 
-                // 2) Content Section
+
                 VStack(alignment: .leading, spacing: 8) {
-                    // Title, date lines, "Add To Calendar" button
                     HStack(alignment: .top) {
                         VStack(alignment: .leading, spacing: 4) {
                             Text(event.title.uppercased())
@@ -55,7 +54,6 @@ struct EventViewRow: View {
                         Spacer()
                         
                         Button(action: {
-                            // Add to calendar action
                         }) {
                             Text("Add To Calendar")
                                 .font(.system(size: 14))
@@ -70,15 +68,12 @@ struct EventViewRow: View {
                     Divider()
                         .padding(.vertical, 4)
                     
-                    // Event description that is expandable
                     Text(event.description)
                         .font(.system(size: 14))
                         .foregroundColor(.black)
                         .lineLimit(isExpanded ? nil : 3)
                         .animation(.easeInOut, value: isExpanded)
                     
-                    // "Read more/less" toggle button.
-                    // Using PlainButtonStyle so its tap is handled by this button only.
                     Button(action: {
                         isExpanded.toggle()
                     }) {
@@ -87,7 +82,6 @@ struct EventViewRow: View {
                             .foregroundColor(.blue)
                     }
                     .buttonStyle(PlainButtonStyle())
-                    // By default, buttons handle their own taps so this tap won’t fall through.
                 }
                 .padding()
             }
@@ -100,16 +94,16 @@ struct EventViewRow: View {
     }
 }
 
-//#Preview {
-//    // Supply a sample event for preview testing
-//    let sampleEvent = Event(
-//        title: "Sample Event with a Very Long Title That Should Wrap",
-//        dateLine1: "Friday, March 14th 2025 at 7:00pm",
-//        dateLine2: "Friday, March 14th 2025 at 11:00pm",
-//        description: "This is a long sample event description that is meant to show how the expandable text works. Tap 'Read more' to see the full description, and tap 'Read less' to collapse it back.",
-//        imageName: "EventImage"
-//    )
-//    NavigationStack {
-//        EventViewRow(event: sampleEvent)
-//    }
-//}
+#Preview {
+    let sampleEvent = Event(
+        title: "Sample Event with a Very Long Title That Should Wrap",
+        dateLine1: "Friday, March 14th 2025 at 7:00pm",
+        dateLine2: "Friday, March 14th 2025 at 11:00pm",
+        description: "This is a long sample event description that is meant to show how the expandable text works. Tap 'Read more' to see the full description, and tap 'Read less' to collapse it back.",
+        location: "Sherdian",
+        imageName: "EventImage"
+    )
+    NavigationStack {
+        EventViewRow(event: sampleEvent)
+    }
+}

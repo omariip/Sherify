@@ -7,11 +7,15 @@
 
 import Foundation
 
+import Foundation
+
 struct Event: Identifiable {
     let id = UUID()
     let title: String
     let dateLine1: String
     let dateLine2: String
     let description: String
+    let location : String
     let imageName: String
 }
+
