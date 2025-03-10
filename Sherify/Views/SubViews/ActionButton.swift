@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-// MARK: - Action Button Component
+
 struct ActionButton: View {
     var title: String
     var icon: String
