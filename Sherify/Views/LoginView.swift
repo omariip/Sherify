@@ -1,16 +1,10 @@
-//
-//  LoginView.swift
-//  Sherify
-//
-//  Created by Omar Abou Chaer on 2025-03-08.
-//
-
 import SwiftUI
 
 struct LoginView: View {
     
     @State private var email = ""
     @State private var password = ""
+    @State private var isLoggedIn = false // Controls the navigation trigger
     
     var body: some View {
         NavigationStack {
@@ -47,7 +41,9 @@ struct LoginView: View {
                 Spacer()
                 
                 VStack(spacing: 10) {
-                    NavigationLink(destination: MainTabView().navigationBarBackButtonHidden(true)) {
+                    Button(action: {
+                        isLoggedIn = true
+                    }) {
                         Text("Login")
                             .frame(maxWidth: 330)
                             .foregroundStyle(.white)
@@ -66,6 +62,11 @@ struct LoginView: View {
             .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .top)
             .background(Color(hex: "#F2F2F7"))
             .ignoresSafeArea()
+            
+            // Navigation to MainTabView
+            .fullScreenCover(isPresented: $isLoggedIn) {
+                MainTabView()
+            }
         }
     }
 }
@@ -73,4 +74,3 @@ struct LoginView: View {
 #Preview {
     LoginView()
 }
-

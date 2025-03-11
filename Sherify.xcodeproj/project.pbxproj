@@ -10,9 +10,22 @@
 		549421A82D7D1751005B60AA /* Sherify.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Sherify.app; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
+		E77211822D7F82150087DD4F /* Exceptions for "Sherify" folder in "Sherify" target */ = {
+			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
+			membershipExceptions = (
+				EventsView.swift,
+			);
+			target = 549421A72D7D1751005B60AA /* Sherify */;
+		};
+/* End PBXFileSystemSynchronizedBuildFileExceptionSet section */
+
 /* Begin PBXFileSystemSynchronizedRootGroup section */
 		549421AA2D7D1751005B60AA /* Sherify */ = {
 			isa = PBXFileSystemSynchronizedRootGroup;
+			exceptions = (
+				E77211822D7F82150087DD4F /* Exceptions for "Sherify" folder in "Sherify" target */,
+			);
 			path = Sherify;
 			sourceTree = "<group>";
 		};
@@ -252,6 +265,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sherify/Preview Content\"";
+				DEVELOPMENT_TEAM = 95AC3EK6J9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -280,6 +294,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_ASSET_PATHS = "\"Sherify/Preview Content\"";
+				DEVELOPMENT_TEAM = 95AC3EK6J9;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
